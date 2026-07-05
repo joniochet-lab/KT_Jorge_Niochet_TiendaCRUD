@@ -1,0 +1,30 @@
+package cl.duoc.tiendaapp.data.remote
+
+import cl.duoc.tiendaapp.model.Producto
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
+
+interface TiendaApi {
+
+    @GET("api/productos")
+    suspend fun listarProductos(): List<Producto>
+
+    @GET("api/productos/{id}")
+    suspend fun obtenerProducto(@Path("id") id: Long): Producto
+
+    @POST("api/productos")
+    suspend fun crearProducto(@Body producto: Producto): Producto
+
+    @PUT("api/productos/{id}")
+    suspend fun actualizarProducto(
+        @Path("id") id: Long,
+        @Body producto: Producto
+    ): Producto
+
+    @DELETE("api/productos/{id}")
+    suspend fun eliminarProducto(@Path("id") id: Long)
+}
